@@ -1,11 +1,10 @@
 package com.example.springboot.Entity;
 
-import com.example.springboot.Entity.Role;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "stage")
+public class Stage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,25 +14,21 @@ public class User {
     private String name;
 
     @Column(nullable = false)
-    private String email;
+    private Integer sequence;
 
-    private String password;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @Column(nullable = false)
+    private Boolean fold;
 
     @Column(nullable = false)
     private Integer status;
 
-    public User() {
+    public Stage() {
     }
 
-    public User(String name, String email, Role role, String password, Integer status) {
+    public Stage(String name, Integer sequence, Boolean fold, Integer status) {
         this.name = name;
-        this.email = email;
-        this.role = role;
-        this.password = password;
+        this.sequence = sequence;
+        this.fold = fold;
         this.status = status;
     }
 
@@ -53,28 +48,20 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public Integer getSequence() {
+        return sequence;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 
-    public Role getRole() {
-        return role;
+    public Boolean getFold() {
+        return fold;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFold(Boolean fold) {
+        this.fold = fold;
     }
 
     public Integer getStatus() {
