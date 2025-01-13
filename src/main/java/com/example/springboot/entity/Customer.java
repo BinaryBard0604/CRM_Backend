@@ -3,8 +3,8 @@ package com.example.springboot.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "partner")
-public class Partner {
+@Table(name = "customer")
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +31,10 @@ public class Partner {
     @Column(nullable = false)
     private Integer status;
 
-    public Partner() {
+    public Customer() {
     }
 
-    public Partner(String name, String email, String phone, String type, Integer customer_rank, Integer supplier_rank, Integer status) {
+    public Customer(String name, String email, String phone, String type, Integer customer_rank, Integer supplier_rank, Integer status) {
         this.name = name;
         this.email = email;
         this.phone = phone;

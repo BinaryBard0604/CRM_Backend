@@ -15,7 +15,7 @@ public class Lead {
 
     @ManyToOne
     @JoinColumn(name = "partner_id")
-    private Partner partner;
+    private Customer partner;
 
     @ManyToOne
     @JoinColumn(name = "stage_id")
@@ -37,7 +37,7 @@ public class Lead {
     public Lead() {
     }
 
-    public Lead(String name, Partner partner, Stage stage, User user, Float probability, Double expectedRevenue, Integer status) {
+    public Lead(String name, Customer partner, Stage stage, User user, Float probability, Double expectedRevenue, Integer status) {
         this.name = name;
         this.partner = partner;
         this.stage = stage;
@@ -63,11 +63,11 @@ public class Lead {
         this.name = name;
     }
 
-    public Partner getPartner() {
+    public Customer getPartner() {
         return partner;
     }
 
-    public void setPartner(Partner partner) {
+    public void setPartner(Customer partner) {
         this.partner = partner;
     }
 
