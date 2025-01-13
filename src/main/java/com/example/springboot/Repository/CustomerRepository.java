@@ -11,17 +11,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PartnerRepository extends JpaRepository<Partner, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query(value = """
-            SELECT * FROM partner WHERE status = 1
+            SELECT * FROM customer WHERE status = 1
             """, nativeQuery = true)
-    List<Partner> findAllWithStatus();
+    List<Customer> findAllWithStatus();
 
     @Modifying
     @Transactional
     @Query(value = """
-            UPDATE Partner p SET p.status = 0 WHERE p.id = :id
+            UPDATE Customer p SET p.status = 0 WHERE p.id = :id
             """)
     void deleteByIdWithStatus(@Param("id") Long id);
 }
