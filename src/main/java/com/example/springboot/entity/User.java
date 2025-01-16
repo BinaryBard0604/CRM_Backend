@@ -19,9 +19,8 @@ public class User {
 
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @JoinColumn(name = "role_id", nullable = false)
+    private Long role_id;
 
     @Column(nullable = false)
     private Integer status;
@@ -29,10 +28,10 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, Role role, String password, Integer status) {
+    public User(String name, String email, Long role_id, String password, Integer status) {
         this.name = name;
         this.email = email;
-        this.role = role;
+        this.role_id = role_id;
         this.password = password;
         this.status = status;
     }
@@ -61,14 +60,6 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -83,5 +74,13 @@ public class User {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Long getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(Long role_id) {
+        this.role_id = role_id;
     }
 }

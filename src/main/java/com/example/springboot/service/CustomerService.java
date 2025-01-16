@@ -26,6 +26,10 @@ public class CustomerService {
         return customerRepository.findAllWithStatus();
     }
 
+    public List<Customer> getCustomerSalespersonById() {
+        return customerRepository.getCustomerSalespersonById();
+    }
+
     public Optional<Customer> getCustomerById(Long id) {
         return customerRepository.findById(id);
     }
@@ -43,6 +47,7 @@ public class CustomerService {
             existingCustomer.setCustomer_rank(customer.getCustomer_rank());
             existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
+            existingCustomer.setSalesperson(customer.getSalesperson());
             return customerRepository.save(existingCustomer);
         });
     }
