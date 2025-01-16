@@ -30,7 +30,7 @@ public class UserService {
         return userRepository.findById(id).map(existingUser -> {
             existingUser.setName(user.getName());
             existingUser.setEmail(user.getEmail());
-            existingUser.setRole(user.getRole());
+            existingUser.setRole_id(user.getRole_id());
             return userRepository.save(existingUser);
         });
     }

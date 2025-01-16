@@ -25,6 +25,11 @@ public class CustomerController {
     @GetMapping("/{id}")
     public Optional<Customer> getCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id);
+    }   
+
+    @GetMapping("/salesperson")
+    public List<Customer> getCustomerSalespersonById() {
+        return customerService.getCustomerSalespersonById();
     }
 
     @PostMapping

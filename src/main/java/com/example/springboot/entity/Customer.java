@@ -29,18 +29,22 @@ public class Customer {
     private Integer supplier_rank;
 
     @Column(nullable = false)
+    private Integer salesperson;
+
+    @Column(nullable = false)
     private Integer status;
 
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone, String type, Integer customer_rank, Integer supplier_rank, Integer status) {
+    public Customer(String name, String email, String phone, String type, Integer customer_rank, Integer supplier_rank, Integer salesperson, Integer status) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.type = type;
         this.customer_rank = customer_rank;
         this.supplier_rank = supplier_rank;
+        this.salesperson = salesperson;
         this.status = status;
     }
 
@@ -106,5 +110,13 @@ public class Customer {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getSalesperson() {
+        return salesperson;
+    }
+
+    public void setSalesperson(Integer salesperson) {
+        this.salesperson = salesperson;
     }
 }

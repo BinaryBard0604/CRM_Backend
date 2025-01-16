@@ -39,7 +39,7 @@ public class AuthController {
 
         // Update the user's details
         existingUser.setName(existingUser.getName());
-        existingUser.setRole(existingUser.getRole());
+        existingUser.setRole_id(existingUser.getRole_id());
         existingUser.setEmail(existingUser.getEmail());
         existingUser.setPassword(PasswordUtil.hashPassword(user.getPassword())); // Encode the new password
 

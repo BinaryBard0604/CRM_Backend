@@ -24,4 +24,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             UPDATE Customer p SET p.status = 0 WHERE p.id = :id
             """)
     void deleteByIdWithStatus(@Param("id") Long id);
+
+    @Query(value = """
+            SELECT * FROM customer WHERE status = 1 AND salesperson = 1
+            """, nativeQuery = true)
+    List<Customer> getCustomerSalespersonById();
 }

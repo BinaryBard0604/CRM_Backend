@@ -14,21 +14,13 @@ public class Stage {
     private String name;
 
     @Column(nullable = false)
-    private Integer sequence;
-
-    @Column(nullable = false)
-    private Boolean fold;
-
-    @Column(nullable = false)
     private Integer status;
 
     public Stage() {
     }
 
-    public Stage(String name, Integer sequence, Boolean fold, Integer status) {
+    public Stage(String name, Integer status) {
         this.name = name;
-        this.sequence = sequence;
-        this.fold = fold;
         this.status = status;
     }
 
@@ -46,22 +38,6 @@ public class Stage {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(Integer sequence) {
-        this.sequence = sequence;
-    }
-
-    public Boolean getFold() {
-        return fold;
-    }
-
-    public void setFold(Boolean fold) {
-        this.fold = fold;
     }
 
     public Integer getStatus() {
