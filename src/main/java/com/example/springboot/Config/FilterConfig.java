@@ -20,26 +20,8 @@ public class FilterConfig {
 
         // Apply to specific API endpoints, excluding /api/auth
         registrationBean.addUrlPatterns("/api/users/*",
-                "/api/categories/*",
-                "/api/checkIns/*",
-                "/api/inventories/*",
-                "/api/itemReceipts/*",
-                "/api/locations/*",
-                "/api/packOrders/*",
-                "/api/pallets/*",
-                "/api/palletItems/*",
-                "/api/pickOrders/*",
-                "/api/pickOrderItems/*",
-                "/api/products/*",
-                "/api/purchaseOrders/*",
-                "/api/purchaseOrderItems/*",
-                "/api/returns/*",
-                "/api/roles/*",
-                "/api/shipments/*",
-                "/api/suppliers/*",
-                "/api/transfers/*",
-                "/api/transferItems/*",
-                "/api/transferPallets/*");
+                "/api/opportunities/*",
+                "/api/customers/*");
 
         return registrationBean;
     }

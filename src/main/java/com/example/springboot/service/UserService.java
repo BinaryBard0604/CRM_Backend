@@ -1,11 +1,16 @@
 package com.example.springboot.Service;
 
+import com.example.springboot.Config.PasswordUtil;
 import com.example.springboot.Entity.User;
 import com.example.springboot.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -14,8 +19,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<Map<String, Object>> getAllUsers() {
+        return userRepository.findAllWithStatus();
     }
 
     public Optional<User> getUserById(Long id) {
@@ -23,7 +28,15 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        return userRepository.save(user);
+        User creatingUser = new User();
+
+        creatingUser.setName(user.getName());
+        creatingUser.setRole_id(user.getRole_id());
+        creatingUser.setEmail(user.getEmail());
+        creatingUser.setPassword(PasswordUtil.hashPassword(user.getPassword()));
+        creatingUser.setStatus(1);
+
+        return userRepository.save(creatingUser);
     }
 
     public Optional<User> updateUser(Long id, User user) {
@@ -31,11 +44,30 @@ public class UserService {
             existingUser.setName(user.getName());
             existingUser.setEmail(user.getEmail());
             existingUser.setRole_id(user.getRole_id());
+            existingUser.setPassword(PasswordUtil.hashPassword(user.getPassword()));
+            existingUser.setStatus(1);
             return userRepository.save(existingUser);
         });
     }
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public Map<String, String> deleteUser(Long id) {
+        try {
+            userRepository.findById(id).map(existingUser -> {
+                existingUser.setName(existingUser.getName());
+                existingUser.setEmail(existingUser.getEmail());
+                existingUser.setRole_id(existingUser.getRole_id());
+                existingUser.setPassword(existingUser.getPassword());
+                existingUser.setStatus(0);
+                return userRepository.save(existingUser);
+            });
+
+            Map<String, String> result = new HashMap<>();
+
+            result.put("msg", "Delete Succesfully");
+
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
