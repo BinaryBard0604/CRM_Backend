@@ -28,32 +28,57 @@ public interface StageRepository extends JpaRepository<Stage, Long> {
     void deleteByIdWithStatus(@Param("id") Long id);
 
     @Query(value = """
-        SELECT
-            stage.id AS id,
-            stage.name AS name,
-            stage.status AS status,
-            CASE 
-                WHEN COUNT(opportunity.id) > 0 THEN 
-                    JSON_ARRAYAGG(
-                        JSON_OBJECT(
-                            'id', opportunity.id,
-                            'name', opportunity.name,
-                            'expected_revenue', opportunity.expected_revenue,
-                            'probability', opportunity.probability,
-                            'contact', opportunity.contact,
-                            'salesperson', opportunity.salesperson,
-                            'expected_closing', opportunity.expected_closing,
-                            'tags', opportunity.tags,
-                            'stage', opportunity.stage,
-                            'status', opportunity.status
-                        )
+    SELECT
+        stage.id AS id,
+        stage.name AS name,
+        stage.status AS status,
+        CASE
+            WHEN COUNT(opportunity.id) > 0 THEN
+                JSON_ARRAYAGG(
+                    JSON_OBJECT(
+                        'id', opportunity.id,
+                        'name', opportunity.name,
+                        'expected_revenue', opportunity.expected_revenue,
+                        'probability', opportunity.probability,
+                        'contact_id', opportunity.contact_id,
+                        'salesperson_id', opportunity.salesperson_id,
+                        'expected_closing', opportunity.expected_closing,
+                        'tags', opportunity.tags,
+                        'stage_id', opportunity.stage_id,
+                        'rating', opportunity.rating,
+                        'status', opportunity.status,
+                        'activities', IFNULL((
+                            SELECT
+                                JSON_ARRAYAGG(
+                                    JSON_OBJECT(
+                                        'id', activity.id,
+                                        'opportunity_id', activity.opportunity_id,
+                                        'type', activity.type,
+                                        'deadline', activity.deadline,
+                                        'summary', activity.summary,
+                                        'assign_id', activity.assign_id,
+                                        'notes', activity.notes,
+                                        'activity_status', activity.activity_status,
+                                        'status', activity.status
+                                    )
+                                )
+                            FROM
+                                activity
+                            WHERE
+                                activity.opportunity_id = opportunity.id
+                        ), JSON_ARRAY())  -- Return empty array if NULL
                     )
-                ELSE 
-                    JSON_ARRAY() 
-            END AS opportunities
-        FROM stage
-        LEFT JOIN opportunity ON stage.id = opportunity.stage_id
-        GROUP BY stage.id, stage.name, stage.status
+                )
+            ELSE
+                JSON_ARRAY()
+        END AS opportunities
+    FROM
+        stage
+    LEFT JOIN
+        opportunity ON stage.id = opportunity.stage_id
+    GROUP BY
+        stage.id, stage.name, stage.status;
     """, nativeQuery = true)
     List<Map<String, Object>> getAllStageResponse();
+
 }
