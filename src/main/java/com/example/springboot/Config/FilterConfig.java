@@ -21,7 +21,8 @@ public class FilterConfig {
         // Apply to specific API endpoints, excluding /api/auth
         registrationBean.addUrlPatterns("/api/users/*",
                 "/api/opportunities/*",
-                "/api/customers/*");
+                "/api/customers/*",
+                "/api/activities/*");
 
         return registrationBean;
     }
