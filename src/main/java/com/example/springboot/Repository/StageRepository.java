@@ -66,6 +66,8 @@ public interface StageRepository extends JpaRepository<Stage, Long> {
                                 activity
                             WHERE
                                 activity.opportunity_id = opportunity.id
+                            AND 
+                                activity.status = 1
                         ), JSON_ARRAY())  -- Return empty array if NULL
                     )
                 )
@@ -75,7 +77,9 @@ public interface StageRepository extends JpaRepository<Stage, Long> {
     FROM
         stage
     LEFT JOIN
-        opportunity ON stage.id = opportunity.stage_id
+        opportunity ON stage.id = opportunity.stage_id AND opportunity.status = 1
+    WHERE
+        stage.status = 1
     GROUP BY
         stage.id, stage.name, stage.status;
     """, nativeQuery = true)
