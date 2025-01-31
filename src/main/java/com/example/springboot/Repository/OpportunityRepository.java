@@ -20,12 +20,12 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
     List<Opportunity> findAllWithStatus();
 
     @Query(value = """
-            SELECT opportunity.id, opportunity.name, opportunity.expected_revenue, opportunity.probability ,customer.name AS contact, c1.name AS salesperson, opportunity.expected_closing, stage.name AS stage, opportunity.tags
-                                                      FROM opportunity\s
-                                                      JOIN customer ON opportunity.contact_id = customer.id
-                                                      JOIN customer c1 ON opportunity.salesperson_id = customer.id
-                                                      JOIN stage ON opportunity.stage_id = stage.id\s
-                                                      WHERE opportunity.status = 1 Order by opportunity.id
+                SELECT opportunity.id, opportunity.name, opportunity.expected_revenue, opportunity.probability ,customer.name AS contact, c1.name AS salesperson, opportunity.expected_closing, stage.name AS stage, opportunity.tags
+                                                          FROM opportunity\s
+                                                          JOIN customer ON opportunity.contact_id = customer.id
+                                                          JOIN customer c1 ON opportunity.salesperson_id = c1.id
+                                                          JOIN stage ON opportunity.stage_id = stage.id\s
+                                                          WHERE opportunity.status = 1 Order by opportunity.id
             """, nativeQuery = true)
     List<Map<String, Object>> findAllDataWithStatus();
 
