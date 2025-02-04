@@ -26,6 +26,10 @@ public class CustomerService {
         return customerRepository.findAllWithStatus();
     }
 
+    public List<Map<String, Object>> getAllData() {
+        return customerRepository.getAllData();
+    }
+
     public List<Customer> getCustomerSalespersonById() {
         return customerRepository.getCustomerSalespersonById();
     }
@@ -47,6 +51,7 @@ public class CustomerService {
             existingCustomer.setCustomer_rank(customer.getCustomer_rank());
             existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
+            existingCustomer.setTeam_id(customer.getTeam_id());
             existingCustomer.setSalesperson(customer.getSalesperson());
             return customerRepository.save(existingCustomer);
         });
@@ -57,9 +62,19 @@ public class CustomerService {
         Map<String, String> result = new HashMap<>();
 
         try {
-            customerRepository.deleteByIdWithStatus(id);
+            List<Map<String, Object>> check1 = customerRepository.check1(id);
+            List<Map<String, Object>> check2 = customerRepository.check2(id);
 
-            result.put("msg", "The customer is deleted successfully.");
+            if ((check1.size() == 0 || check1 == null) && (check2.size() == 0 || check2 == null)) {
+                customerRepository.deleteByIdWithStatus(id);
+
+                result.put("flag", "0");
+                result.put("msg", "The customer is deleted successfully.");
+            } else {
+                result.put("flag", "1");
+                result.put("msg", "Cannot delete");
+            }
+
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "An error occurred while deleting the customer"));

@@ -22,6 +22,11 @@ public class OpportunityController {
         return opportunityService.getAllOpportunities();
     }
 
+    @GetMapping("/anlaysis")
+    public List<Map<String, Object>> getAnalysis() {
+        return opportunityService.getAnalysis();
+    }
+
     @GetMapping("/all")
     public List<Map<String, Object>> getAllDataOpportunities() {
         return opportunityService.getAllDataOpportunities();

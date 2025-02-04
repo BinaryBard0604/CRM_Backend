@@ -30,6 +30,8 @@ public class Opportunity {
 
     private LocalDate expected_closing;
 
+    private LocalDate created_date;
+
     @JoinColumn(name = "stage_id")
     private Long stage_id;
 
@@ -43,13 +45,14 @@ public class Opportunity {
     }
 
     public Opportunity(String name, Integer expected_revenue, Integer probability, Long contact_id, Long salesperson_id, LocalDate expected_closing
-    , String tags, Long stage_id, Integer rating, Integer status) {
+    , LocalDate created_date, String tags, Long stage_id, Integer rating, Integer status) {
         this.name = name;
         this.expected_revenue = expected_revenue;
         this.probability = probability;
         this.contact_id = contact_id;
         this.salesperson_id = salesperson_id;
         this.expected_closing = expected_closing;
+        this.created_date = created_date;
         this.tags = tags;
         this.stage_id = stage_id;
         this.rating = rating;
@@ -142,5 +145,13 @@ public class Opportunity {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public LocalDate getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(LocalDate created_date) {
+        this.created_date = created_date;
     }
 }
