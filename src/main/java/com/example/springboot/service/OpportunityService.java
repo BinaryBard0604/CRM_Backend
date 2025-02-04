@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,11 @@ public class OpportunityService {
         return opportunityRepository.findAllWithStatus();
     }
 
-    public List<Map<String, Object>> getAnalysis() {
-        return opportunityRepository.getAnalysis();
+    public List<Map<String, Object>> getAnalysis(Integer year) {
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year, 12, 31);
+
+        return opportunityRepository.getAnalysis(startDate, endDate);
     }
 
     public List<Map<String, Object>> getAllDataOpportunities() {

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +23,9 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
     @Query(value = """
             SELECT salesperson_id, customer.name AS salesperson, expected_revenue AS revenue, created_date FROM opportunity 
             JOIN customer ON opportunity.salesperson_id = customer.id 
-            WHERE opportunity.status = 1
+            WHERE opportunity.status = 1 AND created_date >= :startDate AND created_date <= :endDate
             """, nativeQuery = true)
-    List<Map<String, Object>> getAnalysis();
+    List<Map<String, Object>> getAnalysis(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Query(value = """
                 SELECT opportunity.id, opportunity.name, opportunity.expected_revenue, opportunity.probability ,customer.name AS contact, 
