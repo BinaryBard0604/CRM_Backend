@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,13 @@ public class OpportunityService {
 
     public List<Opportunity> getAllOpportunities() {
         return opportunityRepository.findAllWithStatus();
+    }
+
+    public List<Map<String, Object>> getAnalysis(Integer year) {
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year, 12, 31);
+
+        return opportunityRepository.getAnalysis(startDate, endDate);
     }
 
     public List<Map<String, Object>> getAllDataOpportunities() {
@@ -48,6 +56,7 @@ public class OpportunityService {
             existingOpportunity.setExpected_closing(opportunity.getExpected_closing());
             existingOpportunity.setTags(opportunity.getTags());
             existingOpportunity.setStage_id(opportunity.getStage_id());
+            existingOpportunity.setCreated_date(existingOpportunity.getCreated_date());
             existingOpportunity.setRating(opportunity.getRating());
             existingOpportunity.setStatus(opportunity.getStatus());
             return opportunityRepository.save(existingOpportunity);
@@ -59,9 +68,18 @@ public class OpportunityService {
         Map<String, String> result = new HashMap<>();
 
         try {
-            opportunityRepository.deleteByIdWithStatus(id);
+            List<Map<String, Object>> check = opportunityRepository.check(id);
 
-            result.put("msg", "The opportunity is deleted successfully.");
+            if (check.size() == 0 || check == null) {
+                opportunityRepository.deleteByIdWithStatus(id);
+
+                result.put("flag", "0");
+                result.put("msg", "The opportunity is deleted successfully.");
+            } else {
+                result.put("flag", "1");
+                result.put("msg", "Cannot delete");
+            }
+
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "An error occurred while deleting the opportunity"));

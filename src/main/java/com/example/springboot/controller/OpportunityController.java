@@ -2,6 +2,8 @@ package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.*;
 import com.example.springboot.Service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +16,22 @@ import java.util.Optional;
 @RequestMapping("/api/opportunities")
 public class OpportunityController {
 
+    private static final Logger logger = LoggerFactory.getLogger(OpportunityController.class);
+
     @Autowired
     private OpportunityService opportunityService;
 
     @GetMapping
     public List<Opportunity> getAllOpportunities() {
         return opportunityService.getAllOpportunities();
+    }
+
+    @PostMapping("/anlaysis")
+    public List<Map<String, Object>> getAnalysis(@RequestBody Map<String, String> payload) {
+        Integer year = Integer.parseInt(payload.get("year"));
+        logger.info(">>>>>>>" + year);
+
+        return opportunityService.getAnalysis(year);
     }
 
     @GetMapping("/all")

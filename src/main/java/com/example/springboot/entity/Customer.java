@@ -29,7 +29,9 @@ public class Customer {
     private Integer supplier_rank;
 
     @Column(nullable = false)
-    private Integer salesperson;
+    private Integer salesperson;;
+
+    private Long team_id;
 
     @Column(nullable = false)
     private Integer status;
@@ -37,7 +39,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone, String type, Integer customer_rank, Integer supplier_rank, Integer salesperson, Integer status) {
+    public Customer(String name, String email, String phone, String type, Integer customer_rank, Integer supplier_rank, Integer salesperson,
+                    Long team_id, Integer status) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -46,6 +49,7 @@ public class Customer {
         this.supplier_rank = supplier_rank;
         this.salesperson = salesperson;
         this.status = status;
+        this.team_id = team_id;
     }
 
     public Long getId() {
@@ -118,5 +122,13 @@ public class Customer {
 
     public void setSalesperson(Integer salesperson) {
         this.salesperson = salesperson;
+    }
+
+    public Long getTeam_id() {
+        return team_id;
+    }
+
+    public void setTeam_id(Long team_id) {
+        this.team_id = team_id;
     }
 }

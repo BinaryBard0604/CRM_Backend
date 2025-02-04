@@ -22,7 +22,8 @@ public class FilterConfig {
         registrationBean.addUrlPatterns("/api/users/*",
                 "/api/opportunities/*",
                 "/api/customers/*",
-                "/api/activities/*");
+                "/api/activities/*",
+                "/api/teams/*");
 
         return registrationBean;
     }
