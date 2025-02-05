@@ -32,7 +32,7 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
                 c1.name AS salesperson, opportunity.expected_closing, opportunity.created_date, stage.name AS stage, opportunity.tags
                                                           FROM opportunity\s
                                                           JOIN customer ON opportunity.contact_id = customer.id
-                                                          JOIN customer c1 ON opportunity.salesperson_id = c1.id
+                                                          JOIN salesperson c1 ON opportunity.salesperson_id = c1.id
                                                           JOIN stage ON opportunity.stage_id = stage.id\s
                                                           WHERE opportunity.status = 1 Order by opportunity.id
             """, nativeQuery = true)
