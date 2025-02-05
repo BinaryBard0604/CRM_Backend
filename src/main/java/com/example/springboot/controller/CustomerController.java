@@ -22,11 +22,6 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    @GetMapping("/all")
-    public List<Map<String, Object>> getAllData() {
-        return customerService.getAllData();
-    }
-
     @GetMapping("/{id}")
     public Optional<Customer> getCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id);

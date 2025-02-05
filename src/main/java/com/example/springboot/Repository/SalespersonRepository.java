@@ -18,4 +18,9 @@ public interface SalespersonRepository extends JpaRepository<Salesperson, Long> 
             SELECT * FROM salesperson WHERE status = 1
             """, nativeQuery = true)
     List<Salesperson> getAllSalesperson();
+
+    @Query(value = """
+            SELECT id FROM salesperson WHERE email = :email
+            """, nativeQuery = true)
+    Long getId(@Param("email") String email);
 }
