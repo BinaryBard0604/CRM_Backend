@@ -14,7 +14,14 @@ public class Team {
     @Column(nullable = false)
     private String name;
 
-    private String description;
+    @Column(nullable = false)
+    private Long leader_id;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private Integer target;
 
     @Column(nullable = false)
     private Integer status;
@@ -22,9 +29,11 @@ public class Team {
     public Team() {
     }
 
-    public Team(String name, String description, Integer status) {
+    public Team(String name, Long leader_id, String email, Integer target, Integer status) {
         this.name = name;
-        this.description = description;
+        this.leader_id = leader_id;
+        this.email = email;
+        this.target = target;
         this.status = status;
     }
 
@@ -52,11 +61,27 @@ public class Team {
         this.status = status;
     }
 
-    public String getDescription() {
-        return description;
+    public Long getLeader_id() {
+        return leader_id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLeader_id(Long leader_id) {
+        this.leader_id = leader_id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getTarget() {
+        return target;
+    }
+
+    public void setTarget(Integer target) {
+        this.target = target;
     }
 }

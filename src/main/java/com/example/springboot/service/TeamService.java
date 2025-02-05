@@ -30,6 +30,10 @@ public class TeamService {
         return teamRepository.findById(id);
     }
 
+    public List<Map<String, Object>> getAllData() {
+        return teamRepository.getAllData();
+    }
+
     public Team createTeam(Team team) {
         return teamRepository.save(team);
     }
@@ -37,7 +41,9 @@ public class TeamService {
     public Optional<Team> updateTeam(Long id, Team team) {
         return teamRepository.findById(id).map(existingTeam -> {
             existingTeam.setName(team.getName());
-            existingTeam.setDescription(team.getDescription());
+            existingTeam.setLeader_id(team.getLeader_id());
+            existingTeam.setEmail(team.getEmail());
+            existingTeam.setTarget(team.getTarget());
             existingTeam.setStatus(team.getStatus());
             return teamRepository.save(existingTeam);
         });

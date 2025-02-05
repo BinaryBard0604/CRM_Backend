@@ -19,6 +19,13 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
             """, nativeQuery = true)
     List<Team> findAllWithStatus();
 
+    @Query(value = """
+            SELECT team.id, salesperson.name AS leader, team.name, team.email, team.target, team.status FROM team 
+            JOIN salesperson ON team.leader_id = salesperson.id
+            WHERE team.status = 1
+            """, nativeQuery = true)
+    List<Map<String, Object>> getAllData();
+
     @Modifying
     @Transactional
     @Query(value = """
