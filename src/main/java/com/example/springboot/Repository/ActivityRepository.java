@@ -21,10 +21,10 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query(value = """
             SELECT activity.id, activity.activity_status, activity.deadline, activity.notes, activity.summary, activity.status, activity.type,
-            opportunity.name AS opportunity, customer.name AS assign
+            opportunity.name AS opportunity, salesperson.name AS assign
             FROM activity
             JOIN opportunity ON activity.opportunity_id = opportunity.id
-            JOIN customer ON activity.assign_id = customer.id
+            JOIN salesperson ON activity.assign_id = salesperson.id
             WHERE activity.status = 1 Order by activity.id
             """, nativeQuery = true)
     List<Map<String, Object>> findAllDataWithStatus();

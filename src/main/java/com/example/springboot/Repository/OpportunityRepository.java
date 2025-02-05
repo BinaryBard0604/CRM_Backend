@@ -21,8 +21,8 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
     List<Opportunity> findAllWithStatus();
 
     @Query(value = """
-            SELECT salesperson_id, customer.name AS salesperson, expected_revenue AS revenue, created_date FROM opportunity 
-            JOIN customer ON opportunity.salesperson_id = customer.id 
+            SELECT salesperson_id, salesperson.name AS salesperson, expected_revenue AS revenue, created_date FROM opportunity 
+            JOIN salesperson ON opportunity.salesperson_id = salesperson.id 
             WHERE opportunity.status = 1 AND created_date >= :startDate AND created_date <= :endDate
             """, nativeQuery = true)
     List<Map<String, Object>> getAnalysis(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
