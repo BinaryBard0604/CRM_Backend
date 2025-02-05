@@ -23,7 +23,8 @@ public class FilterConfig {
                 "/api/opportunities/*",
                 "/api/customers/*",
                 "/api/activities/*",
-                "/api/teams/*");
+                "/api/teams/*",
+                "/api/salespersons/*");
 
         return registrationBean;
     }

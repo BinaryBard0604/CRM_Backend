@@ -51,8 +51,7 @@ public class CustomerService {
             existingCustomer.setCustomer_rank(customer.getCustomer_rank());
             existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
-            existingCustomer.setTeam_id(customer.getTeam_id());
-            existingCustomer.setSalesperson(customer.getSalesperson());
+            existingCustomer.setReference(customer.getReference());
             return customerRepository.save(existingCustomer);
         });
     }

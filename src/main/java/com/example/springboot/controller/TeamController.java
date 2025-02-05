@@ -27,6 +27,11 @@ public class TeamController {
         return teamService.getTeamById(id);
     }
 
+    @GetMapping("/all")
+    public List<Map<String, Object>> getAllData() {
+        return teamService.getAllData();
+    }
+
     @PostMapping
     public Team createTeam(@RequestBody Team team) {
         return teamService.createTeam(team);
