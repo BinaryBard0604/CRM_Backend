@@ -26,10 +26,6 @@ public class CustomerService {
         return customerRepository.findAllWithStatus();
     }
 
-    public List<Map<String, Object>> getAllData() {
-        return customerRepository.getAllData();
-    }
-
     public List<Customer> getCustomerSalespersonById() {
         return customerRepository.getCustomerSalespersonById();
     }
@@ -52,6 +48,7 @@ public class CustomerService {
             existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
             existingCustomer.setReference(customer.getReference());
+            existingCustomer.setMobile(customer.getMobile());
             return customerRepository.save(existingCustomer);
         });
     }

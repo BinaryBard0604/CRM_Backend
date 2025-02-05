@@ -4,6 +4,7 @@ import com.example.springboot.Entity.Role;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "salesperson")
@@ -23,7 +24,7 @@ public class Salesperson {
 
     private String mobile;
 
-    private LocalDate latest_login;
+    private LocalDateTime latest_login;
 
     private String company;
 
@@ -33,7 +34,7 @@ public class Salesperson {
     public Salesperson() {
     }
 
-    public Salesperson(String name, String email, String phone, String mobile, LocalDate latest_login, String company, Integer status) {
+    public Salesperson(String name, String email, String phone, String mobile, LocalDateTime latest_login, String company, Integer status) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -83,11 +84,11 @@ public class Salesperson {
         this.mobile = mobile;
     }
 
-    public LocalDate getLatest_login() {
+    public LocalDateTime getLatest_login() {
         return latest_login;
     }
 
-    public void setLatest_login(LocalDate latest_login) {
+    public void setLatest_login(LocalDateTime latest_login) {
         this.latest_login = latest_login;
     }
 

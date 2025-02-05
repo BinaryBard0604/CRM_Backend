@@ -19,32 +19,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             """, nativeQuery = true)
     List<Customer> findAllWithStatus();
 
-    @Query(value = """
-                SELECT 
-                    customer.id, 
-                    customer.customer_rank, 
-                    customer.email, 
-                    customer.name, 
-                    customer.phone, 
-                    customer.salesperson, 
-                    customer.status, 
-                    customer.supplier_rank,
-                    CASE
-                        WHEN customer.team_id = team.id THEN team.name
-                        ELSE ''
-                    END AS team,
-                    customer.type
-                FROM 
-                    customer
-                LEFT JOIN 
-                    team ON customer.team_id = team.id
-                WHERE 
-                    customer.status = 1
-                ORDER BY 
-                    customer.id;
-            """, nativeQuery = true)
-    List<Map<String, Object>> getAllData();
-
     @Modifying
     @Transactional
     @Query(value = """
