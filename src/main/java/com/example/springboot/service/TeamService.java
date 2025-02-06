@@ -45,6 +45,7 @@ public class TeamService {
             existingTeam.setEmail(team.getEmail());
             existingTeam.setTarget(team.getTarget());
             existingTeam.setStatus(team.getStatus());
+            existingTeam.setSalespersons(team.getSalespersons());
             return teamRepository.save(existingTeam);
         });
     }

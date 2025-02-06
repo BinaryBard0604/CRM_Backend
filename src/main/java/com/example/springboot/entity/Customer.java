@@ -16,6 +16,8 @@ public class Customer {
     @Column(nullable = false)
     private String email;
 
+    private String attached_email;
+
     @Column(nullable = false)
     private String phone;
 
@@ -38,7 +40,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone, String mobile, String type, Integer customer_rank, Integer supplier_rank, String reference, Integer status) {
+    public Customer(String name, String email, String phone, String mobile, String type, Integer customer_rank, String attached_email, Integer supplier_rank, String reference, Integer status) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -47,6 +49,7 @@ public class Customer {
         this.customer_rank = customer_rank;
         this.supplier_rank = supplier_rank;
         this.reference = reference;
+        this.attached_email = attached_email;
         this.status = status;
     }
 
@@ -128,5 +131,13 @@ public class Customer {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getAttached_email() {
+        return attached_email;
+    }
+
+    public void setAttached_email(String attached_email) {
+        this.attached_email = attached_email;
     }
 }

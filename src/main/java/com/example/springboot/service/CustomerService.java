@@ -38,6 +38,22 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
+    public Optional<Customer> updatedEmail(Long id, String email) {
+        return customerRepository.findById(id).map(existingCustomer -> {
+            existingCustomer.setName(existingCustomer.getName());
+            existingCustomer.setEmail(existingCustomer.getEmail());
+            existingCustomer.setPhone(existingCustomer.getPhone());
+            existingCustomer.setType(existingCustomer.getType());
+            existingCustomer.setCustomer_rank(existingCustomer.getCustomer_rank());
+            existingCustomer.setSupplier_rank(existingCustomer.getSupplier_rank());
+            existingCustomer.setStatus(existingCustomer.getStatus());
+            existingCustomer.setReference(existingCustomer.getReference());
+            existingCustomer.setAttached_email(email);
+            existingCustomer.setMobile(existingCustomer.getMobile());
+            return customerRepository.save(existingCustomer);
+        });
+    }
+
     public Optional<Customer> updateCustomer(Long id, Customer customer) {
         return customerRepository.findById(id).map(existingCustomer -> {
             existingCustomer.setName(customer.getName());
@@ -48,6 +64,7 @@ public class CustomerService {
             existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
             existingCustomer.setReference(customer.getReference());
+            existingCustomer.setAttached_email(customer.getAttached_email());
             existingCustomer.setMobile(customer.getMobile());
             return customerRepository.save(existingCustomer);
         });

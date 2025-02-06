@@ -23,17 +23,21 @@ public class Team {
     @Column(nullable = false)
     private Integer target;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String salespersons;
+
     @Column(nullable = false)
     private Integer status;
 
     public Team() {
     }
 
-    public Team(String name, Long leader_id, String email, Integer target, Integer status) {
+    public Team(String name, Long leader_id, String email, Integer target, String salespersons, Integer status) {
         this.name = name;
         this.leader_id = leader_id;
         this.email = email;
         this.target = target;
+        this.salespersons = salespersons;
         this.status = status;
     }
 
@@ -83,5 +87,13 @@ public class Team {
 
     public void setTarget(Integer target) {
         this.target = target;
+    }
+
+    public String getSalespersons() {
+        return salespersons;
+    }
+
+    public void setSalespersons(String salespersons) {
+        this.salespersons = salespersons;
     }
 }

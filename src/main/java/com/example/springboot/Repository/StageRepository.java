@@ -42,6 +42,7 @@ public interface StageRepository extends JpaRepository<Stage, Long> {
                         'probability', opportunity.probability,
                         'contact_id', opportunity.contact_id,
                         'salesperson_id', opportunity.salesperson_id,
+                        'team_id', opportunity.team_id,
                         'expected_closing', opportunity.expected_closing,
                         'tags', opportunity.tags,
                         'stage_id', opportunity.stage_id,
