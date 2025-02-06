@@ -32,6 +32,14 @@ public class CustomerController {
         return customerService.getCustomerSalespersonById();
     }
 
+    @PostMapping("/updatedEmail")
+    public Optional<Customer> updatedEmail(@RequestBody Map<String, String> payload) {
+        String id = payload.get("id");
+        String email = payload.get("email");
+
+        return customerService.updatedEmail(Long.parseLong(id), email);
+    }
+
     @PostMapping
     public Customer createCustomer(@RequestBody Customer customer) {
         return customerService.createCustomer(customer);

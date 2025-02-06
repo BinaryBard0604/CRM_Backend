@@ -58,6 +58,7 @@ public class OpportunityService {
             existingOpportunity.setStage_id(opportunity.getStage_id());
             existingOpportunity.setCreated_date(existingOpportunity.getCreated_date());
             existingOpportunity.setRating(opportunity.getRating());
+            existingOpportunity.setTeam_id(opportunity.getTeam_id());
             existingOpportunity.setStatus(opportunity.getStatus());
             return opportunityRepository.save(existingOpportunity);
         });

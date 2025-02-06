@@ -32,6 +32,9 @@ public class Opportunity {
 
     private LocalDate created_date;
 
+    @Column(nullable = false)
+    private Long team_id;
+
     @JoinColumn(name = "stage_id")
     private Long stage_id;
 
@@ -45,7 +48,7 @@ public class Opportunity {
     }
 
     public Opportunity(String name, Integer expected_revenue, Integer probability, Long contact_id, Long salesperson_id, LocalDate expected_closing
-    , LocalDate created_date, String tags, Long stage_id, Integer rating, Integer status) {
+    , LocalDate created_date, String tags, Long stage_id, Integer rating, Long team_id, Integer status) {
         this.name = name;
         this.expected_revenue = expected_revenue;
         this.probability = probability;
@@ -56,6 +59,7 @@ public class Opportunity {
         this.tags = tags;
         this.stage_id = stage_id;
         this.rating = rating;
+        this.team_id = team_id;
         this.status = status;
     }
 
@@ -153,5 +157,13 @@ public class Opportunity {
 
     public void setCreated_date(LocalDate created_date) {
         this.created_date = created_date;
+    }
+
+    public Long getTeam_id() {
+        return team_id;
+    }
+
+    public void setTeam_id(Long team_id) {
+        this.team_id = team_id;
     }
 }

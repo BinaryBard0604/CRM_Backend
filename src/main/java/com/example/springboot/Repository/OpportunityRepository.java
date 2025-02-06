@@ -29,11 +29,12 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
 
     @Query(value = """
                 SELECT opportunity.id, opportunity.name, opportunity.expected_revenue, opportunity.probability ,customer.name AS contact, 
-                c1.name AS salesperson, opportunity.expected_closing, opportunity.created_date, stage.name AS stage, opportunity.tags
+                c1.name AS salesperson, opportunity.expected_closing, opportunity.created_date, stage.name AS stage, opportunity.tags, team.name AS team
                                                           FROM opportunity\s
                                                           JOIN customer ON opportunity.contact_id = customer.id
                                                           JOIN salesperson c1 ON opportunity.salesperson_id = c1.id
-                                                          JOIN stage ON opportunity.stage_id = stage.id\s
+                                                          JOIN stage ON opportunity.stage_id = stage.id
+                                                          JOIN team ON opportunity.team_id = team.id
                                                           WHERE opportunity.status = 1 Order by opportunity.id
             """, nativeQuery = true)
     List<Map<String, Object>> findAllDataWithStatus();
