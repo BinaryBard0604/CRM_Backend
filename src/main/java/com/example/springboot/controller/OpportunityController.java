@@ -29,7 +29,6 @@ public class OpportunityController {
     @PostMapping("/anlaysis")
     public List<Map<String, Object>> getAnalysis(@RequestBody Map<String, String> payload) {
         Integer year = Integer.parseInt(payload.get("year"));
-        logger.info(">>>>>>>" + year);
 
         return opportunityService.getAnalysis(year);
     }

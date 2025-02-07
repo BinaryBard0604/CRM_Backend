@@ -30,6 +30,10 @@ public class ActivityService {
         return activityRepository.findAllDataWithStatus();
     }
 
+    public List<Map<String, Object>> getAllCalendarDataActivities() {
+        return activityRepository.findAllCalendarDataWithStatus();
+    }
+
     public Optional<Activity> getActivityById(Long id) {
         return activityRepository.findById(id);
     }

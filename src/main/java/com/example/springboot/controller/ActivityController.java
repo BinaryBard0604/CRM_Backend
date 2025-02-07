@@ -27,6 +27,11 @@ public class ActivityController {
         return activityService.getAllDataActivities();
     }
 
+    @GetMapping("/allCalendar")
+    public List<Map<String, Object>> getAllCalendarDataActivities() {
+        return activityService.getAllCalendarDataActivities();
+    }
+
     @GetMapping("/{id}")
     public Optional<Activity> getActivityById(@PathVariable Long id) {
         return activityService.getActivityById(id);
