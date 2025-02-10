@@ -30,10 +30,9 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
     List<Map<String, Object>> getAnalysis(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Query(value = """
-                SELECT opportunity.id, opportunity.name, opportunity.expected_revenue, opportunity.probability ,customer.name AS contact, 
+                SELECT opportunity.id, opportunity.name, opportunity.expected_revenue, opportunity.probability ,opportunity.contact, opportunity.email, opportunity.phone,
                 c1.name AS salesperson, opportunity.expected_closing, opportunity.created_date, stage.name AS stage, opportunity.tags, team.name AS team
                                                           FROM opportunity
-                                                          JOIN customer ON opportunity.contact_id = customer.id
                                                           JOIN salesperson c1 ON opportunity.salesperson_id = c1.id
                                                           JOIN stage ON opportunity.stage_id = stage.id
                                                           JOIN team ON opportunity.team_id = team.id

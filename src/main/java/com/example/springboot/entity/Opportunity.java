@@ -22,10 +22,16 @@ public class Opportunity {
     @Column(nullable = false)
     private Integer probability;
 
-    @JoinColumn(name = "contact_id", nullable = true)
-    private Long contact_id;
+    @Column(nullable = true)
+    private String contact;
 
-    @JoinColumn(name = "salesperson_id", nullable = true)
+    @Column(nullable = true)
+    private String email;
+
+    @Column(nullable = true)
+    private String phone;
+
+    @Column(name = "salesperson_id", nullable = true)
     private Long salesperson_id;
 
     private LocalDate expected_closing;
@@ -47,12 +53,14 @@ public class Opportunity {
     public Opportunity() {
     }
 
-    public Opportunity(String name, Integer expected_revenue, Integer probability, Long contact_id, Long salesperson_id, LocalDate expected_closing
+    public Opportunity(String name, Integer expected_revenue, Integer probability, String contact, String email, String phone, Long salesperson_id, LocalDate expected_closing
     , LocalDate created_date, String tags, Long stage_id, Integer rating, Long team_id, Integer status) {
         this.name = name;
         this.expected_revenue = expected_revenue;
         this.probability = probability;
-        this.contact_id = contact_id;
+        this.contact = contact;
+        this.email = email;
+        this.phone = phone;
         this.salesperson_id = salesperson_id;
         this.expected_closing = expected_closing;
         this.created_date = created_date;
@@ -119,14 +127,6 @@ public class Opportunity {
         this.status = status;
     }
 
-    public Long getContact_id() {
-        return contact_id;
-    }
-
-    public void setContact_id(Long contact_id) {
-        this.contact_id = contact_id;
-    }
-
     public Long getSalesperson_id() {
         return salesperson_id;
     }
@@ -165,5 +165,29 @@ public class Opportunity {
 
     public void setTeam_id(Long team_id) {
         this.team_id = team_id;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

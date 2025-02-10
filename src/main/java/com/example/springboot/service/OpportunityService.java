@@ -51,7 +51,9 @@ public class OpportunityService {
             existingOpportunity.setName(opportunity.getName());
             existingOpportunity.setExpected_revenue(opportunity.getExpected_revenue());
             existingOpportunity.setProbability(opportunity.getProbability());
-            existingOpportunity.setContact_id(opportunity.getContact_id());
+            existingOpportunity.setContact(opportunity.getContact());
+            existingOpportunity.setEmail(opportunity.getEmail());
+            existingOpportunity.setPhone(opportunity.getPhone());
             existingOpportunity.setSalesperson_id(opportunity.getSalesperson_id());
             existingOpportunity.setExpected_closing(opportunity.getExpected_closing());
             existingOpportunity.setTags(opportunity.getTags());
