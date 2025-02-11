@@ -71,4 +71,8 @@ public class TeamService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "An error occurred while deleting the activity"));
         }
     }
+
+    public List<Map<String, Object>> searchTeamWithSalesperson(String salespersonId) {
+        return teamRepository.searchTeamWithSalesperson(salespersonId);
+    }
 }

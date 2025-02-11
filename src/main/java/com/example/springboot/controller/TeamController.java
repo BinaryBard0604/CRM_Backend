@@ -37,6 +37,13 @@ public class TeamController {
         return teamService.createTeam(team);
     }
 
+    @PostMapping("/searchTeam")
+    public List<Map<String, Object>> searchTeamWithSalesperson(@RequestBody Map<String, String> payload) {
+        String salespersonId = payload.get("salespersonId");
+
+        return teamService.searchTeamWithSalesperson(salespersonId);
+    }
+
     @PutMapping("/{id}")
     public Optional<Team> updateTeam(@PathVariable Long id, @RequestBody Team team) {
         return teamService.updateTeam(id, team);

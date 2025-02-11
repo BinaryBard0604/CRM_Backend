@@ -39,4 +39,10 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
             WHERE team.id = :id
             """, nativeQuery = true)
     List<Map<String, Object>> check(@Param("id") Long id);
+
+    @Query(value = """
+            SELECT name FROM team
+            WHERE salespersons LIKE CONCAT('%', :salespersonId, '%')
+            """, nativeQuery = true)
+    List<Map<String, Object>> searchTeamWithSalesperson(@Param("salespersonId") String salespersonId);
 }
