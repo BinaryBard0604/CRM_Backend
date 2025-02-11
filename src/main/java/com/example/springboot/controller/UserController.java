@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "https://3.29.237.128", allowCredentials = "true")
 @RequestMapping("/api/users")
 public class UserController {
 
