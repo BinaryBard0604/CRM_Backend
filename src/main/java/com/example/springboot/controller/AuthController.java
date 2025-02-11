@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*", allowCredentials = "true")
 @RequestMapping("/api/auth")
 public class AuthController {
 

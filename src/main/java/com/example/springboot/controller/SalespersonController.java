@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*", allowCredentials = "true")
 @RequestMapping("/api/salespersons")
 public class SalespersonController {
 
