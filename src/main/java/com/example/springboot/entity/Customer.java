@@ -16,8 +16,10 @@ public class Customer {
     @Column(nullable = false)
     private String email;
 
-    @Column(columnDefinition = "TEXT")
-    private String attached_email;
+    private String file_name;
+
+    @Lob // Use LOB to store large binary data
+    private byte[] file_data;
 
     @Column(nullable = false)
     private String phone;
@@ -41,7 +43,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone, String mobile, String type, Integer customer_rank, String attached_email, Integer supplier_rank, String reference, Integer status) {
+    public Customer(String name, String email, String phone, String mobile, String type, Integer customer_rank, String file_name, byte[] file_data, Integer supplier_rank, String reference, Integer status) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -50,7 +52,8 @@ public class Customer {
         this.customer_rank = customer_rank;
         this.supplier_rank = supplier_rank;
         this.reference = reference;
-        this.attached_email = attached_email;
+        this.file_data = file_data;
+        this.file_name = file_name;
         this.status = status;
     }
 
@@ -134,11 +137,19 @@ public class Customer {
         this.mobile = mobile;
     }
 
-    public String getAttached_email() {
-        return attached_email;
+    public String getFile_name() {
+        return file_name;
     }
 
-    public void setAttached_email(String attached_email) {
-        this.attached_email = attached_email;
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
+    }
+
+    public byte[] getFile_data() {
+        return file_data;
+    }
+
+    public void setFile_data(byte[] file_data) {
+        this.file_data = file_data;
     }
 }
