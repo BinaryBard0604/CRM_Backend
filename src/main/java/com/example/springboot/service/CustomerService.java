@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Optional<Customer> updatedEmail(Long id, String email) {
+    public Optional<Customer> updatedEmail(Long id, MultipartFile file) {
         return customerRepository.findById(id).map(existingCustomer -> {
             existingCustomer.setName(existingCustomer.getName());
             existingCustomer.setEmail(existingCustomer.getEmail());
@@ -48,7 +50,12 @@ public class CustomerService {
             existingCustomer.setSupplier_rank(existingCustomer.getSupplier_rank());
             existingCustomer.setStatus(existingCustomer.getStatus());
             existingCustomer.setReference(existingCustomer.getReference());
-            existingCustomer.setAttached_email(email);
+            try {
+                existingCustomer.setFile_data(file.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            existingCustomer.setFile_name(file.getOriginalFilename());
             existingCustomer.setMobile(existingCustomer.getMobile());
             return customerRepository.save(existingCustomer);
         });
@@ -63,8 +70,26 @@ public class CustomerService {
             existingCustomer.setCustomer_rank(customer.getCustomer_rank());
             existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
+            existingCustomer.setFile_data(customer.getFile_data());
+            existingCustomer.setFile_name(customer.getFile_name());
             existingCustomer.setReference(customer.getReference());
-            existingCustomer.setAttached_email(customer.getAttached_email());
+            existingCustomer.setMobile(customer.getMobile());
+            return customerRepository.save(existingCustomer);
+        });
+    }
+
+    public Optional<Customer> updateCustomer1(Long id, Customer customer) {
+        return customerRepository.findById(id).map(existingCustomer -> {
+            existingCustomer.setName(customer.getName());
+            existingCustomer.setEmail(customer.getEmail());
+            existingCustomer.setPhone(customer.getPhone());
+            existingCustomer.setType(customer.getType());
+            existingCustomer.setCustomer_rank(customer.getCustomer_rank());
+            existingCustomer.setSupplier_rank(customer.getSupplier_rank());
+            existingCustomer.setStatus(customer.getStatus());
+            existingCustomer.setFile_data(existingCustomer.getFile_data());
+            existingCustomer.setFile_name(existingCustomer.getFile_name());
+            existingCustomer.setReference(customer.getReference());
             existingCustomer.setMobile(customer.getMobile());
             return customerRepository.save(existingCustomer);
         });

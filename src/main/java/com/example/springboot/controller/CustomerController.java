@@ -1,10 +1,15 @@
 package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.*;
+import com.example.springboot.Repository.CustomerRepository;
 import com.example.springboot.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +21,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @GetMapping
     public List<Customer> getAllCustomers() {
@@ -32,12 +40,28 @@ public class CustomerController {
         return customerService.getCustomerSalespersonById();
     }
 
-    @PostMapping("/updatedEmail")
-    public Optional<Customer> updatedEmail(@RequestBody Map<String, String> payload) {
-        String id = payload.get("id");
-        String email = payload.get("email");
+    @PutMapping("/updatedEmail/{id}")
+    public Optional<Customer> updatedEmail(@PathVariable Long id, @RequestParam("uploadedFile") MultipartFile file) {
 
-        return customerService.updatedEmail(Long.parseLong(id), email);
+        return customerService.updatedEmail(id, file);
+    }
+
+    @GetMapping("/{id}/file")
+    public ResponseEntity<?> getFile(@PathVariable Long id) {
+        return customerRepository.findById(id).map(customer -> {
+            byte[] fileData = customer.getFile_data();
+            String fileName = customer.getFile_name();
+
+            if (fileData == null || fileData.length == 0) {
+                return ResponseEntity.notFound().build(); // File not found
+            }
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", fileName); // Use the file name from the database
+
+            return new ResponseEntity<>(fileData, headers, HttpStatus.OK);
+        }).orElse(ResponseEntity.notFound().build()); // Customer not found
     }
 
     @PostMapping
@@ -48,6 +72,11 @@ public class CustomerController {
     @PutMapping("/{id}")
     public Optional<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
         return customerService.updateCustomer(id, customer);
+    }
+
+    @PutMapping("/cusomter1/{id}")
+    public Optional<Customer> updateCustomer1(@PathVariable Long id, @RequestBody Customer customer) {
+        return customerService.updateCustomer1(id, customer);
     }
 
     @PostMapping("/delete")
