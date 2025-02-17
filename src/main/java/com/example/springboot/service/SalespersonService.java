@@ -37,6 +37,8 @@ public class SalespersonService {
     public Optional<Salesperson> updateLoginDate(LocalDateTime loginTime, String email) {
         Long id = salespersonRepository.getId(email);
 
+        logger.info("----------" + id);
+
         return salespersonRepository.findById(id).map(existingSalesperson -> {
             existingSalesperson.setName(existingSalesperson.getName());
             existingSalesperson.setEmail(existingSalesperson.getEmail());
