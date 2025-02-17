@@ -41,7 +41,7 @@ public class SalespersonController {
         String loginTime = payload.get("loginTime");
         String email = payload.get("email");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy, HH:mm:ss");
 
         // Parse the string to LocalDateTime
         LocalDateTime localDateTime = LocalDateTime.parse(loginTime, formatter);
