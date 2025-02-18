@@ -36,7 +36,7 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @Query(value = """
             SELECT * FROM team 
             JOIN opportunity ON team.id = opportunity.team_id
-            WHERE team.id = :id
+            WHERE team.id = :id AND opportunity.status = 1
             """, nativeQuery = true)
     List<Map<String, Object>> check(@Param("id") Long id);
 

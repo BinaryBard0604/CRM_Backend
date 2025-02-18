@@ -50,7 +50,7 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
     @Query(value = """
             SELECT * FROM opportunity
             JOIN activity ON opportunity.id = activity.opportunity_id
-            WHERE opportunity.id = :id AND activity.activity_status = 1
+            WHERE opportunity.id = :id AND activity.activity_status = 1 AND activity.status = 1
             """, nativeQuery = true)
     List<Map<String, Object>> check(@Param("id") Long id);
 }
