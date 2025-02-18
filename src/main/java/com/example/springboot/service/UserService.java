@@ -1,7 +1,9 @@
 package com.example.springboot.Service;
 
 import com.example.springboot.Config.PasswordUtil;
+import com.example.springboot.Entity.Salesperson;
 import com.example.springboot.Entity.User;
+import com.example.springboot.Repository.SalespersonRepository;
 import com.example.springboot.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SalespersonRepository salespersonRepository;
 
     public List<Map<String, Object>> getAllUsers() {
         return userRepository.findAllWithStatus();
@@ -46,6 +51,19 @@ public class UserService {
             existingUser.setRole_id(user.getRole_id());
             existingUser.setPassword(PasswordUtil.hashPassword(user.getPassword()));
             existingUser.setStatus(1);
+
+            Long salespersonId = salespersonRepository.getId(existingUser.getEmail());
+            salespersonRepository.findById(salespersonId).map(existingSalesperson -> {
+                existingSalesperson.setName(user.getName());
+                existingSalesperson.setEmail(user.getEmail());
+                existingSalesperson.setPhone(existingSalesperson.getPhone());
+                existingSalesperson.setMobile(existingSalesperson.getMobile());
+                existingSalesperson.setCompany(existingSalesperson.getCompany());
+                existingSalesperson.setLatest_login(existingSalesperson.getLatest_login());
+                existingSalesperson.setStatus(existingSalesperson.getStatus());
+
+                return existingSalesperson;
+            });
             return userRepository.save(existingUser);
         });
     }
