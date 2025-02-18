@@ -54,7 +54,7 @@ public class AuthController {
         User existingUser = userRepository.findByEmail(user.getEmail());
 
         // Check if the user exists
-        if (existingUser == null) {
+        if (existingUser == null || existingUser.getStatus() == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
 

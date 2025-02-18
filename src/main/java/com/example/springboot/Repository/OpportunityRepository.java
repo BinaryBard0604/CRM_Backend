@@ -31,7 +31,7 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
 
     @Query(value = """
                 SELECT opportunity.id, opportunity.name, opportunity.expected_revenue, opportunity.probability ,opportunity.contact, opportunity.email, opportunity.phone,
-                c1.name AS salesperson, opportunity.expected_closing, opportunity.created_date, stage.name AS stage, opportunity.tags, team.name AS team
+                c1.name AS salesperson, c1.email AS salesperson_email, opportunity.expected_closing, opportunity.created_date, stage.name AS stage, opportunity.tags, team.name AS team
                                                           FROM opportunity
                                                           JOIN salesperson c1 ON opportunity.salesperson_id = c1.id
                                                           JOIN stage ON opportunity.stage_id = stage.id
