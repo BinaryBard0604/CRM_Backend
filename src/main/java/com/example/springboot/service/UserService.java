@@ -5,6 +5,8 @@ import com.example.springboot.Entity.Salesperson;
 import com.example.springboot.Entity.User;
 import com.example.springboot.Repository.SalespersonRepository;
 import com.example.springboot.Repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class UserService {
 
     @Autowired
     private SalespersonRepository salespersonRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public List<Map<String, Object>> getAllUsers() {
         return userRepository.findAllWithStatus();
@@ -46,12 +50,6 @@ public class UserService {
 
     public Optional<User> updateUser(Long id, User user) {
         return userRepository.findById(id).map(existingUser -> {
-            existingUser.setName(user.getName());
-            existingUser.setEmail(user.getEmail());
-            existingUser.setRole_id(user.getRole_id());
-            existingUser.setPassword(PasswordUtil.hashPassword(user.getPassword()));
-            existingUser.setStatus(1);
-
             Long salespersonId = salespersonRepository.getId(existingUser.getEmail());
             salespersonRepository.findById(salespersonId).map(existingSalesperson -> {
                 existingSalesperson.setName(user.getName());
@@ -64,6 +62,12 @@ public class UserService {
 
                 return existingSalesperson;
             });
+
+            existingUser.setName(user.getName());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setRole_id(user.getRole_id());
+            existingUser.setPassword(PasswordUtil.hashPassword(user.getPassword()));
+            existingUser.setStatus(1);
             return userRepository.save(existingUser);
         });
     }
