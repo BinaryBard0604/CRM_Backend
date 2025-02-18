@@ -176,18 +176,18 @@ public class CustomerService {
         Map<String, String> result = new HashMap<>();
 
         try {
-            List<Map<String, Object>> check1 = customerRepository.check1(id);
-            List<Map<String, Object>> check2 = customerRepository.check2(id);
-
-            if ((check1.size() == 0 || check1 == null) && (check2.size() == 0 || check2 == null)) {
+//            List<Map<String, Object>> check1 = customerRepository.check1(id);
+//            List<Map<String, Object>> check2 = customerRepository.check2(id);
+//
+//            if ((check1.size() == 0 || check1 == null) && (check2.size() == 0 || check2 == null)) {
                 customerRepository.deleteByIdWithStatus(id);
 
                 result.put("flag", "0");
                 result.put("msg", "The customer is deleted successfully.");
-            } else {
-                result.put("flag", "1");
-                result.put("msg", "Cannot delete");
-            }
+//            } else {
+//                result.put("flag", "1");
+//                result.put("msg", "Cannot delete");
+//            }
 
             return ResponseEntity.ok(result);
         } catch (Exception e) {

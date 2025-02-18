@@ -32,7 +32,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query(value = """
             SELECT activity.id, activity.activity_status, activity.deadline, activity.notes, activity.summary, activity.status, activity.type,
-            opportunity.name AS opportunity, salesperson.name AS assign, stage.name AS stage
+            opportunity.name AS opportunity, salesperson.email AS assign_email, salesperson.name AS assign, stage.name AS stage
             FROM activity
             JOIN opportunity ON activity.opportunity_id = opportunity.id
             JOIN stage ON stage.id = opportunity.stage_id
