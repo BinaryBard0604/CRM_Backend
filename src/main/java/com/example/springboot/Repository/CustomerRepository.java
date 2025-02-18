@@ -10,14 +10,25 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query(value = """
+            SELECT id FROM customer WHERE reference = :awb
+            """, nativeQuery = true)
+    Map<String, Long> findIDByAWB(@Param("awb") String awb);
+
+    @Query(value = """
             SELECT * FROM customer WHERE status = 1
             """, nativeQuery = true)
     List<Customer> findAllWithStatus();
+
+    @Query(value = """
+            SELECT * FROM customer WHERE reference = :awb
+            """, nativeQuery = true)
+    Optional<Customer> findByAWB(@Param("awb") String awb);
 
     @Modifying
     @Transactional
