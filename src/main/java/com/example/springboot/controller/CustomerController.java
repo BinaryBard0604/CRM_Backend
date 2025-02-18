@@ -33,7 +33,12 @@ public class CustomerController {
     @GetMapping("/{id}")
     public Optional<Customer> getCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id);
-    }   
+    }
+
+    @GetMapping("/awb/{awb}")
+    public Optional<Customer> getCustomerByAWB(@PathVariable String awb) {
+        return customerService.getCustomerByAWB(awb);
+    }
 
     @GetMapping("/salesperson")
     public List<Customer> getCustomerSalespersonById() {
@@ -44,6 +49,12 @@ public class CustomerController {
     public Optional<Customer> updatedEmail(@PathVariable Long id, @RequestParam("uploadedFile") MultipartFile file) {
 
         return customerService.updatedEmail(id, file);
+    }
+
+    @PutMapping("/updatedEmail/customerawb/{awb}")
+    public Optional<Customer> updatedcustomerawbEmail(@PathVariable String awb, @RequestParam("uploadedFile") MultipartFile file) {
+
+        return customerService.updatedcustomerawbEmail(awb, file);
     }
 
     @GetMapping("/{id}/file")
@@ -77,6 +88,16 @@ public class CustomerController {
     @PutMapping("/cusomter1/{id}")
     public Optional<Customer> updateCustomer1(@PathVariable Long id, @RequestBody Customer customer) {
         return customerService.updateCustomer1(id, customer);
+    }
+
+    @PutMapping("/customerawb/{awb}")
+    public Optional<Customer> updatecustomerawbCustomer(@PathVariable String awb, @RequestBody Customer customer) {
+        return customerService.updatecustomerawbCustomer(awb, customer);
+    }
+
+    @PutMapping("/cusomter1/customerawb/{awb}")
+    public Optional<Customer> updatecustomerawbCustomer1(@PathVariable String awb, @RequestBody Customer customer) {
+        return customerService.updatecustomerawbCustomer1(awb, customer);
     }
 
     @PostMapping("/delete")

@@ -36,11 +36,38 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
+    public Optional<Customer> getCustomerByAWB(String awb) {
+        return customerRepository.findByAWB(awb);
+    }
+
     public Customer createCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 
     public Optional<Customer> updatedEmail(Long id, MultipartFile file) {
+        return customerRepository.findById(id).map(existingCustomer -> {
+            existingCustomer.setName(existingCustomer.getName());
+            existingCustomer.setEmail(existingCustomer.getEmail());
+            existingCustomer.setPhone(existingCustomer.getPhone());
+            existingCustomer.setType(existingCustomer.getType());
+            existingCustomer.setCustomer_rank(existingCustomer.getCustomer_rank());
+            existingCustomer.setSupplier_rank(existingCustomer.getSupplier_rank());
+            existingCustomer.setStatus(existingCustomer.getStatus());
+            existingCustomer.setReference(existingCustomer.getReference());
+            try {
+                existingCustomer.setFile_data(file.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            existingCustomer.setFile_name(file.getOriginalFilename());
+            existingCustomer.setMobile(existingCustomer.getMobile());
+            return customerRepository.save(existingCustomer);
+        });
+    }
+
+    public Optional<Customer> updatedcustomerawbEmail(String awb, MultipartFile file) {
+        Map<String, Long> check = customerRepository.findIDByAWB(awb);
+        Long id = check.get("id");
         return customerRepository.findById(id).map(existingCustomer -> {
             existingCustomer.setName(existingCustomer.getName());
             existingCustomer.setEmail(existingCustomer.getEmail());
@@ -93,6 +120,55 @@ public class CustomerService {
             existingCustomer.setMobile(customer.getMobile());
             return customerRepository.save(existingCustomer);
         });
+    }
+
+    public Optional<Customer> updatecustomerawbCustomer(String awb, Customer customer) {
+        Map<String, Long> check = customerRepository.findIDByAWB(awb);
+        if(check.isEmpty()) {
+            return Optional.of(customerRepository.save(customer));
+        } else {
+            Long id = check.get("id");
+            return customerRepository.findById(id).map(existingCustomer -> {
+                existingCustomer.setName(customer.getName());
+                existingCustomer.setEmail(customer.getEmail());
+                existingCustomer.setPhone(customer.getPhone());
+                existingCustomer.setType(customer.getType());
+                existingCustomer.setCustomer_rank(customer.getCustomer_rank());
+                existingCustomer.setSupplier_rank(customer.getSupplier_rank());
+                existingCustomer.setStatus(customer.getStatus());
+                existingCustomer.setFile_data(customer.getFile_data());
+                existingCustomer.setFile_name(customer.getFile_name());
+                existingCustomer.setReference(customer.getReference());
+                existingCustomer.setMobile(customer.getMobile());
+                return customerRepository.save(existingCustomer);
+            });
+        }
+
+    }
+
+    public Optional<Customer> updatecustomerawbCustomer1(String awb, Customer customer) {
+
+        Map<String, Long> check = customerRepository.findIDByAWB(awb);
+        if(check.isEmpty()) {
+            return Optional.of(customerRepository.save(customer));
+        } else {
+            Long id = check.get("id");
+            return customerRepository.findById(id).map(existingCustomer -> {
+                existingCustomer.setName(customer.getName());
+                existingCustomer.setEmail(customer.getEmail());
+                existingCustomer.setPhone(customer.getPhone());
+                existingCustomer.setType(customer.getType());
+                existingCustomer.setCustomer_rank(customer.getCustomer_rank());
+                existingCustomer.setSupplier_rank(customer.getSupplier_rank());
+                existingCustomer.setStatus(customer.getStatus());
+                existingCustomer.setFile_data(existingCustomer.getFile_data());
+                existingCustomer.setFile_name(existingCustomer.getFile_name());
+                existingCustomer.setReference(customer.getReference());
+                existingCustomer.setMobile(customer.getMobile());
+                return customerRepository.save(existingCustomer);
+            });
+        }
+
     }
 
     public ResponseEntity<Map<String, String>> deleteCustomer(Long id) {
