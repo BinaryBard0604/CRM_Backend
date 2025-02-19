@@ -20,7 +20,7 @@ public interface SalespersonRepository extends JpaRepository<Salesperson, Long> 
     List<Salesperson> getAllSalesperson();
 
     @Query(value = """
-            SELECT id FROM salesperson WHERE email = :email
+            SELECT id FROM salesperson WHERE email = :email AND status = 1
             """, nativeQuery = true)
     Long getId(@Param("email") String email);
 }

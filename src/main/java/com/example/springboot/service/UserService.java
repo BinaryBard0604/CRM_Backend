@@ -75,6 +75,18 @@ public class UserService {
     public Map<String, String> deleteUser(Long id) {
         try {
             userRepository.findById(id).map(existingUser -> {
+                Long salespersonId = salespersonRepository.getId(existingUser.getEmail());
+                salespersonRepository.findById(salespersonId).map(existingSalesperson -> {
+                    existingSalesperson.setName(existingSalesperson.getName());
+                    existingSalesperson.setEmail(existingSalesperson.getEmail());
+                    existingSalesperson.setPhone(existingSalesperson.getPhone());
+                    existingSalesperson.setMobile(existingSalesperson.getMobile());
+                    existingSalesperson.setLatest_login(existingSalesperson.getLatest_login());
+                    existingSalesperson.setCompany(existingSalesperson.getCompany());
+                    existingSalesperson.setStatus(0);
+                    return salespersonRepository.save(existingSalesperson);
+                });
+
                 existingUser.setName(existingUser.getName());
                 existingUser.setEmail(existingUser.getEmail());
                 existingUser.setRole_id(existingUser.getRole_id());
