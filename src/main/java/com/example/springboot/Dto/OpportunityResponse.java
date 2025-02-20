@@ -1,8 +1,8 @@
 package com.example.springboot.Dto;
 
-import com.example.springboot.Entity.Customer;
-import com.example.springboot.Entity.Opportunity;
-import com.example.springboot.Entity.Stage;
+import com.example.springboot.entity.Customer;
+import com.example.springboot.entity.Opportunity;
+import com.example.springboot.entity.Stage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 

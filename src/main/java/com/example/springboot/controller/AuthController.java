@@ -1,9 +1,9 @@
-package com.example.springboot.Controller;
+package com.example.springboot.controller;
 
 import com.example.springboot.Config.JwtUtil;
 import com.example.springboot.Config.PasswordUtil;
-import com.example.springboot.Entity.User;
-import com.example.springboot.Repository.UserRepository;
+import com.example.springboot.entity.User;
+import com.example.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

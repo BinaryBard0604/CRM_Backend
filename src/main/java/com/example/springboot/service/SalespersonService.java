@@ -1,21 +1,14 @@
-package com.example.springboot.Service;
+package com.example.springboot.service;
 
-import com.example.springboot.Controller.AuthController;
-import com.example.springboot.Entity.Opportunity;
-import com.example.springboot.Entity.Salesperson;
-import com.example.springboot.Entity.Team;
-import com.example.springboot.Repository.OpportunityRepository;
-import com.example.springboot.Repository.SalespersonRepository;
+import com.example.springboot.entity.Salesperson;
+import com.example.springboot.repository.SalespersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -42,7 +35,6 @@ public class SalespersonService {
         return salespersonRepository.findById(id).map(existingSalesperson -> {
             existingSalesperson.setName(existingSalesperson.getName());
             existingSalesperson.setEmail(existingSalesperson.getEmail());
-            existingSalesperson.setCompany(existingSalesperson.getCompany());
             existingSalesperson.setMobile(existingSalesperson.getMobile());
             existingSalesperson.setPhone(existingSalesperson.getPhone());
             existingSalesperson.setStatus(existingSalesperson.getStatus());
@@ -62,7 +54,6 @@ public class SalespersonService {
             existingSalesperson.setPhone(salesperson.getPhone());
             existingSalesperson.setMobile(salesperson.getMobile());
             existingSalesperson.setLatest_login(salesperson.getLatest_login());
-            existingSalesperson.setCompany(salesperson.getCompany());
             existingSalesperson.setStatus(salesperson.getStatus());
             return salespersonRepository.save(existingSalesperson);
         });

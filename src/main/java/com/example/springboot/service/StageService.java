@@ -1,8 +1,7 @@
-package com.example.springboot.Service;
+package com.example.springboot.service;
 
-import com.example.springboot.Dto.StageAllResponse;
-import com.example.springboot.Entity.*;
-import com.example.springboot.Repository.*;
+import com.example.springboot.entity.*;
+import com.example.springboot.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

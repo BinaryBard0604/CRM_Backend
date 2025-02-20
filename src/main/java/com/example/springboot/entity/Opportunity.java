@@ -1,4 +1,4 @@
-package com.example.springboot.Entity;
+package com.example.springboot.entity;
 
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;

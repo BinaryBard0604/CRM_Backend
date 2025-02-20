@@ -1,7 +1,7 @@
-package com.example.springboot.Controller;
+package com.example.springboot.controller;
 
-import com.example.springboot.Entity.*;
-import com.example.springboot.Service.*;
+import com.example.springboot.entity.*;
+import com.example.springboot.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

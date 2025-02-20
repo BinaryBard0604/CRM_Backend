@@ -1,6 +1,6 @@
 package com.example.springboot.Dto;
 
-import com.example.springboot.Entity.Opportunity;
+import com.example.springboot.entity.Opportunity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

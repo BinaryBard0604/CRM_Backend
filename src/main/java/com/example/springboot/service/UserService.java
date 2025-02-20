@@ -1,15 +1,13 @@
-package com.example.springboot.Service;
+package com.example.springboot.service;
 
 import com.example.springboot.Config.PasswordUtil;
-import com.example.springboot.Entity.Salesperson;
-import com.example.springboot.Entity.User;
-import com.example.springboot.Repository.SalespersonRepository;
-import com.example.springboot.Repository.UserRepository;
+import com.example.springboot.entity.Salesperson;
+import com.example.springboot.entity.User;
+import com.example.springboot.repository.SalespersonRepository;
+import com.example.springboot.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package com.example.springboot.Repository;
+package com.example.springboot.repository;
 
-import com.example.springboot.Entity.*;
+import com.example.springboot.entity.*;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
