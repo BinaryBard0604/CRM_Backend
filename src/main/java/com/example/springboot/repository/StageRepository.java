@@ -30,6 +30,7 @@ public interface StageRepository extends JpaRepository<Stage, Long> {
     SELECT
         stage.id AS id,
         stage.name AS name,
+        stage.stage_role AS stage_role,
         stage.status AS status,
         CASE
             WHEN COUNT(opportunity.id) > 0 THEN

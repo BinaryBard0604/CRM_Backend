@@ -20,7 +20,7 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     List<Team> findAllWithStatus();
 
     @Query(value = """
-            SELECT team.id, salesperson.name AS leader, team.name, team.email, team.target, team.status FROM team 
+            SELECT team.id, salesperson.name AS leader, team.name, team.email, team.target, team.status, team.company FROM team 
             JOIN salesperson ON team.leader_id = salesperson.id
             WHERE team.status = 1
             """, nativeQuery = true)
@@ -45,4 +45,9 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
             WHERE salespersons LIKE CONCAT('%', :salespersonId, '%')
             """, nativeQuery = true)
     List<Map<String, Object>> searchTeamWithSalesperson(@Param("salespersonId") String salespersonId);
+
+    @Query(value = """
+            SELECT * FROM team WHERE status = 1 AND salespersons LIKE CONCAT('%', :salespersonId, '%')
+            """, nativeQuery = true)
+    List<Map<String, Object>> getCheckSalesperson(@Param("salespersonId") Long salespersonId);
 }

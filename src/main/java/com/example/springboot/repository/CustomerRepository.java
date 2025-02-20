@@ -21,9 +21,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Map<String, Long> findIDByAWB(@Param("awb") String awb);
 
     @Query(value = """
-            SELECT * FROM customer WHERE status = 1
+            SELECT customer.*, salesperson.name as created_salesperson_name, salesperson.email as created_salesperson_email 
+            FROM customer JOIN salesperson ON customer.created_salespersonid = salesperson.id WHERE customer.status = 1
             """, nativeQuery = true)
-    List<Customer> findAllWithStatus();
+    List<Map<String, Object>> findAllWithStatus();
 
     @Query(value = """
             SELECT * FROM customer WHERE reference = :awb

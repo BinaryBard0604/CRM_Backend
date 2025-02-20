@@ -21,11 +21,11 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
     List<Opportunity> findAllWithStatus();
 
     @Query(value = """
-            SELECT salesperson_id, salesperson.name AS salesperson, expected_revenue AS revenue, created_date 
+            SELECT salesperson_id, salesperson.name AS salesperson, expected_revenue AS revenue, created_date, probability 
             FROM opportunity 
             JOIN salesperson ON opportunity.salesperson_id = salesperson.id 
             JOIN stage ON opportunity.stage_id = stage.id
-            WHERE opportunity.status = 1 AND created_date >= :startDate AND created_date <= :endDate AND stage.name = "Done"
+            WHERE opportunity.status = 1 AND created_date >= :startDate AND created_date <= :endDate AND stage.stage_role = "Done"
             """, nativeQuery = true)
     List<Map<String, Object>> getAnalysis(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
@@ -53,4 +53,9 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Long> 
             WHERE opportunity.id = :id AND activity.activity_status = 1 AND activity.status = 1
             """, nativeQuery = true)
     List<Map<String, Object>> check(@Param("id") Long id);
+
+    @Query(value = """
+            SELECT * FROM opportunity WHERE status = 1 AND salesperson_id = :salespersonId
+            """, nativeQuery = true)
+    List<Map<String, Object>> getCheckSalesperson(@Param("salespersonId") Long salespersonId);
 }

@@ -14,13 +14,17 @@ public class Stage {
     private String name;
 
     @Column(nullable = false)
+    private String stage_role;
+
+    @Column(nullable = false)
     private Integer status;
 
     public Stage() {
     }
 
-    public Stage(String name, Integer status) {
+    public Stage(String name, Integer status, String stage_role) {
         this.name = name;
+        this.stage_role = stage_role;
         this.status = status;
     }
 
@@ -46,5 +50,13 @@ public class Stage {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getStage_role() {
+        return stage_role;
+    }
+
+    public void setStage_role(String stage_role) {
+        this.stage_role = stage_role;
     }
 }

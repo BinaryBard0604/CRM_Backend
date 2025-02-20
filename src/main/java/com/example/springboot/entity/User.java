@@ -1,6 +1,5 @@
 package com.example.springboot.entity;
 
-import com.example.springboot.entity.Role;
 import jakarta.persistence.*;
 
 @Entity

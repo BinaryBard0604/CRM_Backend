@@ -1,6 +1,5 @@
 package com.example.springboot.entity;
 
-import com.example.springboot.entity.Role;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -26,21 +25,18 @@ public class Salesperson {
 
     private LocalDateTime latest_login;
 
-    private String company;
-
     @Column(nullable = false)
     private Integer status;
 
     public Salesperson() {
     }
 
-    public Salesperson(String name, String email, String phone, String mobile, LocalDateTime latest_login, String company, Integer status) {
+    public Salesperson(String name, String email, String phone, String mobile, LocalDateTime latest_login, Integer status) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.mobile = mobile;
         this.latest_login = latest_login;
-        this.company = company;
         this.status = status;
     }
 
@@ -90,14 +86,6 @@ public class Salesperson {
 
     public void setLatest_login(LocalDateTime latest_login) {
         this.latest_login = latest_login;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
     }
 
     public Integer getStatus() {

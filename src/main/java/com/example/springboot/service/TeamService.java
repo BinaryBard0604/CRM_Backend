@@ -44,6 +44,7 @@ public class TeamService {
             existingTeam.setLeader_id(team.getLeader_id());
             existingTeam.setEmail(team.getEmail());
             existingTeam.setTarget(team.getTarget());
+            existingTeam.setCompany(team.getCompany());
             existingTeam.setStatus(team.getStatus());
             existingTeam.setSalespersons(team.getSalespersons());
             return teamRepository.save(existingTeam);

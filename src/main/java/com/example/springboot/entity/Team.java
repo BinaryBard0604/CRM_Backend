@@ -27,16 +27,20 @@ public class Team {
     private String salespersons;
 
     @Column(nullable = false)
+    private String company;
+
+    @Column(nullable = false)
     private Integer status;
 
     public Team() {
     }
 
-    public Team(String name, Long leader_id, String email, Integer target, String salespersons, Integer status) {
+    public Team(String name, Long leader_id, String email, Integer target, String salespersons, Integer status, String company) {
         this.name = name;
         this.leader_id = leader_id;
         this.email = email;
         this.target = target;
+        this.company = company;
         this.salespersons = salespersons;
         this.status = status;
     }
@@ -95,5 +99,13 @@ public class Team {
 
     public void setSalespersons(String salespersons) {
         this.salespersons = salespersons;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

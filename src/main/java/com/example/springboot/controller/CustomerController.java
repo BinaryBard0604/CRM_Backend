@@ -26,7 +26,7 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @GetMapping
-    public List<Customer> getAllCustomers() {
+    public List<Map<String, Object>> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 

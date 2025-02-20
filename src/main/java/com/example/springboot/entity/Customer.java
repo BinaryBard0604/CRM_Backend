@@ -29,32 +29,28 @@ public class Customer {
     @Column(nullable = false)
     private String type;
 
-    @Column(nullable = false)
-    private Integer customer_rank;
-
-    @Column(nullable = false)
-    private Integer supplier_rank;
-
     private String reference;
 
     @Column(nullable = false)
     private Integer status;
 
+    @Column(nullable = false)
+    private Long created_salespersonid;
+
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone, String mobile, String type, Integer customer_rank, String file_name, byte[] file_data, Integer supplier_rank, String reference, Integer status) {
+    public Customer(String name, String email, String phone, String mobile, String type, String file_name, byte[] file_data, String reference, Integer status, Long created_salespersonid) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.mobile = mobile;
         this.type = type;
-        this.customer_rank = customer_rank;
-        this.supplier_rank = supplier_rank;
         this.reference = reference;
         this.file_data = file_data;
         this.file_name = file_name;
         this.status = status;
+        this.created_salespersonid = created_salespersonid;
     }
 
     public Long getId() {
@@ -97,22 +93,6 @@ public class Customer {
         this.type = type;
     }
 
-    public Integer getCustomer_rank() {
-        return customer_rank;
-    }
-
-    public void setCustomer_rank(Integer customer_rank) {
-        this.customer_rank = customer_rank;
-    }
-
-    public Integer getSupplier_rank() {
-        return supplier_rank;
-    }
-
-    public void setSupplier_rank(Integer supplier_rank) {
-        this.supplier_rank = supplier_rank;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -151,5 +131,13 @@ public class Customer {
 
     public void setFile_data(byte[] file_data) {
         this.file_data = file_data;
+    }
+
+    public Long getCreated_salespersonid() {
+        return created_salespersonid;
+    }
+
+    public void setCreated_salespersonid(Long created_salespersonid) {
+        this.created_salespersonid = created_salespersonid;
     }
 }

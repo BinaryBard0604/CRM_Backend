@@ -37,7 +37,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
             JOIN opportunity ON activity.opportunity_id = opportunity.id
             JOIN stage ON stage.id = opportunity.stage_id
             JOIN salesperson ON activity.assign_id = salesperson.id
-            WHERE activity.status = 1 AND stage.name NOT IN ('Done', 'Closed') Order by activity.id
+            WHERE activity.status = 1 AND stage.stage_role NOT IN ('Done', 'Failure') Order by activity.id
             """, nativeQuery = true)
     List<Map<String, Object>> findAllCalendarDataWithStatus();
 

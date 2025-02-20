@@ -24,7 +24,7 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public List<Customer> getAllCustomers() {
+    public List<Map<String, Object>> getAllCustomers() {
         return customerRepository.findAllWithStatus();
     }
 
@@ -50,10 +50,9 @@ public class CustomerService {
             existingCustomer.setEmail(existingCustomer.getEmail());
             existingCustomer.setPhone(existingCustomer.getPhone());
             existingCustomer.setType(existingCustomer.getType());
-            existingCustomer.setCustomer_rank(existingCustomer.getCustomer_rank());
-            existingCustomer.setSupplier_rank(existingCustomer.getSupplier_rank());
             existingCustomer.setStatus(existingCustomer.getStatus());
             existingCustomer.setReference(existingCustomer.getReference());
+            existingCustomer.setCreated_salespersonid(existingCustomer.getCreated_salespersonid());
             try {
                 existingCustomer.setFile_data(file.getBytes());
             } catch (IOException e) {
@@ -73,10 +72,9 @@ public class CustomerService {
             existingCustomer.setEmail(existingCustomer.getEmail());
             existingCustomer.setPhone(existingCustomer.getPhone());
             existingCustomer.setType(existingCustomer.getType());
-            existingCustomer.setCustomer_rank(existingCustomer.getCustomer_rank());
-            existingCustomer.setSupplier_rank(existingCustomer.getSupplier_rank());
             existingCustomer.setStatus(existingCustomer.getStatus());
             existingCustomer.setReference(existingCustomer.getReference());
+            existingCustomer.setCreated_salespersonid(existingCustomer.getCreated_salespersonid());
             try {
                 existingCustomer.setFile_data(file.getBytes());
             } catch (IOException e) {
@@ -94,13 +92,12 @@ public class CustomerService {
             existingCustomer.setEmail(customer.getEmail());
             existingCustomer.setPhone(customer.getPhone());
             existingCustomer.setType(customer.getType());
-            existingCustomer.setCustomer_rank(customer.getCustomer_rank());
-            existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
             existingCustomer.setFile_data(customer.getFile_data());
             existingCustomer.setFile_name(customer.getFile_name());
             existingCustomer.setReference(customer.getReference());
             existingCustomer.setMobile(customer.getMobile());
+            existingCustomer.setCreated_salespersonid(customer.getCreated_salespersonid());
             return customerRepository.save(existingCustomer);
         });
     }
@@ -111,13 +108,12 @@ public class CustomerService {
             existingCustomer.setEmail(customer.getEmail());
             existingCustomer.setPhone(customer.getPhone());
             existingCustomer.setType(customer.getType());
-            existingCustomer.setCustomer_rank(customer.getCustomer_rank());
-            existingCustomer.setSupplier_rank(customer.getSupplier_rank());
             existingCustomer.setStatus(customer.getStatus());
             existingCustomer.setFile_data(existingCustomer.getFile_data());
             existingCustomer.setFile_name(existingCustomer.getFile_name());
             existingCustomer.setReference(customer.getReference());
             existingCustomer.setMobile(customer.getMobile());
+            existingCustomer.setCreated_salespersonid(customer.getCreated_salespersonid());
             return customerRepository.save(existingCustomer);
         });
     }
@@ -133,13 +129,12 @@ public class CustomerService {
                 existingCustomer.setEmail(customer.getEmail());
                 existingCustomer.setPhone(customer.getPhone());
                 existingCustomer.setType(customer.getType());
-                existingCustomer.setCustomer_rank(customer.getCustomer_rank());
-                existingCustomer.setSupplier_rank(customer.getSupplier_rank());
                 existingCustomer.setStatus(customer.getStatus());
                 existingCustomer.setFile_data(customer.getFile_data());
                 existingCustomer.setFile_name(customer.getFile_name());
                 existingCustomer.setReference(customer.getReference());
                 existingCustomer.setMobile(customer.getMobile());
+                existingCustomer.setCreated_salespersonid(customer.getCreated_salespersonid());
                 return customerRepository.save(existingCustomer);
             });
         }
@@ -158,17 +153,15 @@ public class CustomerService {
                 existingCustomer.setEmail(customer.getEmail());
                 existingCustomer.setPhone(customer.getPhone());
                 existingCustomer.setType(customer.getType());
-                existingCustomer.setCustomer_rank(customer.getCustomer_rank());
-                existingCustomer.setSupplier_rank(customer.getSupplier_rank());
                 existingCustomer.setStatus(customer.getStatus());
                 existingCustomer.setFile_data(existingCustomer.getFile_data());
                 existingCustomer.setFile_name(existingCustomer.getFile_name());
                 existingCustomer.setReference(customer.getReference());
                 existingCustomer.setMobile(customer.getMobile());
+                existingCustomer.setCreated_salespersonid(customer.getCreated_salespersonid());
                 return customerRepository.save(existingCustomer);
             });
         }
-
     }
 
     public ResponseEntity<Map<String, String>> deleteCustomer(Long id) {

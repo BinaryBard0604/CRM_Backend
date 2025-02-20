@@ -38,6 +38,7 @@ public class StageService {
         return stageRepository.findById(id).map(existingStage -> {
             existingStage.setName(stage.getName());
             existingStage.setStatus(stage.getStatus());
+            existingStage.setStage_role(stage.getStage_role());
             return stageRepository.save(existingStage);
         });
     }
